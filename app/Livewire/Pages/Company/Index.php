@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Pages\Company;
 
-use App\Models\CompanyProfile;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -12,7 +12,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->companies = CompanyProfile::with('user')->get();
+        $this->companies = Company::with('user')->get();
     }
 
     public function render()

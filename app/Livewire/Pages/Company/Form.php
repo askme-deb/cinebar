@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Pages\Company;
 
-use App\Models\CompanyProfile;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -35,7 +35,7 @@ class Form extends Component
     public function mount($companyId = null)
     {
         if ($companyId) {
-            $company = CompanyProfile::findOrFail($companyId);
+            $company = Company::findOrFail($companyId);
             $this->companyId = $company->id;
             $this->name = $company->name;
             $this->email = $company->email;
@@ -65,9 +65,9 @@ class Form extends Component
             'pan' => $this->pan,
         ];
         if ($this->companyId) {
-            CompanyProfile::where('id', $this->companyId)->update($data);
+            Company::where('id', $this->companyId)->update($data);
         } else {
-            CompanyProfile::create($data);
+            Company::create($data);
         }
         session()->flash('status', 'Company profile saved successfully!');
         return redirect()->route('company.index');

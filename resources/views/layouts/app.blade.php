@@ -69,6 +69,23 @@
 								</ul>
 							</div>
 						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="link-icon" data-feather="gift"></i>
+								<span class="menu-title">Scratch Cards</span>
+								<i class="link-arrow"></i>
+							</a>
+							<div class="submenu">
+								<ul class="submenu-item">
+									<li class="category-heading">Scratch Cards</li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('admin.scratch-cards.index') }}" wire:navigate>List</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('admin.scratch-cards.create') }}" wire:navigate>Create</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('admin.scratch-cards.redemptions') }}" wire:navigate>Redemptions</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('admin.scratch-cards.dashboard') }}" wire:navigate>Dashboard</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('admin.scratch-cards.import') }}" wire:navigate>Import</a></li>
+								</ul>
+							</div>
+						</li>
 
 					</ul>
 				</div>
