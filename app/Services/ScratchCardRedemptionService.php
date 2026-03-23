@@ -15,9 +15,9 @@ class ScratchCardRedemptionService
     {
         $validator = Validator::make($data, [
             'card_number' => 'required|string',
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email',
-            'mobile' => 'required|digits_between:8,15',
+            'name'        => 'required|string|max:255',
+            'email'       => 'nullable|email',
+            'mobile'      => 'required|digits_between:8,15',
         ]);
 
         if ($validator->fails()) {
@@ -26,7 +26,12 @@ class ScratchCardRedemptionService
 
         return DB::transaction(function () use ($data) {
 
-            $card = ScratchCard::where('card_number', $data['card_number'])->first();
+            // FIX: lockForUpdate() places a row-level lock so concurrent
+            // transactions must wait, eliminating the race condition where
+            // two requests could both pass status/duplicate checks simultaneously.
+            $card = ScratchCard::where('card_number', $data['card_number'])
+                ->lockForUpdate()
+                ->first();
 
             if (!$card) {
                 return ['success' => false, 'message' => 'Invalid scratch card number'];
@@ -36,11 +41,11 @@ class ScratchCardRedemptionService
                 return ['success' => false, 'message' => 'Card already used or expired'];
             }
 
-            if (!$card->company || $card->company->status !== 'active') {
-                return ['success' => false, 'message' => 'Invalid company'];
-            }
+            // if (!$card->company || $card->company->status !== 'active') {
+            //     return ['success' => false, 'message' => 'Invalid company'];
+            // }
 
-            // Prevent duplicate by mobile
+            // Prevent duplicate redemption by the same mobile number
             $alreadyRedeemed = ScratchCardRedemption::where('mobile', $data['mobile'])
                 ->where('scratch_card_id', $card->id)
                 ->exists();
@@ -49,25 +54,25 @@ class ScratchCardRedemptionService
                 return ['success' => false, 'message' => 'You have already redeemed this card'];
             }
 
-            // Create redemption
+            // Create redemption record
             $redemption = ScratchCardRedemption::create([
                 'scratch_card_id' => $card->id,
-                'name' => $data['name'],
-                'email' => $data['email'] ?? null,
-                'mobile' => $data['mobile'],
-                'redeemed_at' => Carbon::now(),
+                'name'            => $data['name'],
+                'email'           => $data['email'] ?? null,
+                'mobile'          => $data['mobile'],
+                'redeemed_at'     => Carbon::now(),
             ]);
 
-            // Update card
+            // Mark card as used
             $card->update([
-                'status' => 'used',
+                'status'  => 'used',
                 'used_at' => Carbon::now(),
             ]);
 
             return [
                 'success' => true,
                 'message' => 'Redemption successful',
-                'data' => $redemption
+                'data'    => $redemption,
             ];
         });
     }

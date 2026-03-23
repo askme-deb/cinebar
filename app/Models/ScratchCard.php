@@ -15,6 +15,7 @@ class ScratchCard extends Model
         'coupon_value',
         'status',
         'used_at',
+        'amount',
     ];
 
     public function company()
