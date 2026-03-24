@@ -39,7 +39,7 @@
                             <p>6 New Notifications</p>
                             <a href="javascript:;" class="text-secondary">Clear all</a>
                         </div>
-                        <div class="p-1">
+                        {{-- <div class="p-1">
                             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                                 <div class="w-30px h-30px d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
                                     <i class="icon-sm text-white" data-feather="gift"></i>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
                             <a href="javascript:;">View all</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <ul class="list-unstyled p-1">
-                            <li class="dropdown-item py-2">
+                            {{-- <li class="dropdown-item py-2">
                                 <a href="pages/general/profile.html" class="text-body ms-0">
                                     <i class="me-2 icon-md" data-feather="user"></i>
                                     <span>Profile</span>
@@ -123,7 +123,7 @@
                                     <i class="me-2 icon-md" data-feather="repeat"></i>
                                     <span>Switch User</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="dropdown-item py-2">
                                 <button type="button" class="text-body ms-0 btn btn-link p-0 d-flex align-items-center" wire:click="logout">
                                     <i class="me-2 icon-md" data-feather="log-out"></i>

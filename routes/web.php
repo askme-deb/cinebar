@@ -21,7 +21,7 @@ use App\Http\Controllers\RewardsController;
 
 // Services
 use App\Services\ScratchCardRedemptionService;
-
+// use App\Livewire\ScratchCardDashboard;
 /*
 |--------------------------------------------------------------------------
 | Public Website Routes
@@ -61,7 +61,9 @@ Route::post('/rewards/submit', [RewardsController::class, 'submit'])
 |--------------------------------------------------------------------------
 */
 
-Route::view('dashboard', 'dashboard')
+
+
+Route::get('dashboard', ScratchCardDashboard::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

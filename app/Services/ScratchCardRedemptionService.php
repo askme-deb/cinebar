@@ -26,9 +26,6 @@ class ScratchCardRedemptionService
 
         return DB::transaction(function () use ($data) {
 
-            // FIX: lockForUpdate() places a row-level lock so concurrent
-            // transactions must wait, eliminating the race condition where
-            // two requests could both pass status/duplicate checks simultaneously.
             $card = ScratchCard::where('card_number', $data['card_number'])
                 ->lockForUpdate()
                 ->first();
@@ -73,6 +70,7 @@ class ScratchCardRedemptionService
                 'success' => true,
                 'message' => 'Redemption successful',
                 'data'    => $redemption,
+                'amount'  => $card->coupon_value,
             ];
         });
     }

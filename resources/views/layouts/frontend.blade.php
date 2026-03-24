@@ -47,7 +47,7 @@
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-left">
-                <img src="{{ asset('images/logo.png') }}" class="footer-logo" alt="Cinebar">
+                <img src="{{ asset('assets/frontend/images/logo.png') }}" class="footer-logo" alt="Cinebar">
                 <div class="social-icons">
                     <a href="#"><i class="fab fa-threads"></i></a>
                     <a href="#"><i class="fab fa-tiktok"></i></a>

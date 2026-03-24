@@ -16,7 +16,7 @@
                 <!-- STEP 1 -->
                 <div class="step active" data-step="1">
                     <h4>Enter Mobile Number</h4>
-                    <input type="text" id="mobile" placeholder="Mobile Number" inputmode="numeric">
+                    <input type="text" id="mobile" placeholder="Mobile Number" minlength="10" maxlength="10" inputmode="numeric">
                     <button type="button" id="step1Btn">Next</button>
                 </div>
 
@@ -44,7 +44,7 @@
                 </div>
 
             </form>
-
+             <div id="resultBox"></div>
             <div id="messageBox" role="alert" aria-live="polite"></div>
         </div>
 
@@ -89,7 +89,7 @@
 
     /** Matches backend rule: digits_between:8,15 */
     function validateMobile(mobile) {
-        return /^[0-9]{8,15}$/.test(mobile);
+        return /^[0-9]{10}$/.test(mobile);
     }
 
     function setLoading(btn, loading) {
@@ -235,11 +235,19 @@
                 showMessage(data?.message || `Server error (${status}), try again`, 'danger');
                 return;
             }
-
+                console.log(data.status);
             if (data.status === 'ok') {
+                let resultMsg = '';
+                if (typeof data.amount !== 'undefined' && data.amount > 0) {
+                    resultMsg = `<div class="alert alert-success">🎉 Congratulations! You have won ₹${data.amount}. Your reward has been submitted successfully.</div>`;
+                } else {
+                    resultMsg = `<div class="alert alert-warning">😔 Better luck next time!</div>`;
+                }
+                document.getElementById('resultBox').innerHTML = resultMsg;
                 showMessage('✅ Submitted successfully!', 'success');
                 document.getElementById('rewardForm').reset();
                 validatedCard = null;
+                document.getElementById('rewardForm').style.display = 'none'; // hide form after successful submission
                 showStep(1);
             } else {
                 showMessage(data.message || 'Submission failed', 'danger');

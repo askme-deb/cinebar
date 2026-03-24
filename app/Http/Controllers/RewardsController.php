@@ -44,7 +44,10 @@ class RewardsController extends Controller
             $result = $service->redeem($request->all());
 
             if ($result['success']) {
-                return response()->json(['status' => 'ok']);
+                return response()->json([
+                    'status' => 'ok',
+                    'amount' => $result['amount'] ?? null
+                ]);
             }
 
             return response()->json([

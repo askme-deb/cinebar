@@ -577,25 +577,25 @@ Cinebar strives to build a future where mindful drinking is the norm — a world
 
             <div class="col-6 col-md-3 col-lg-2">
                 <div class="brand-card">
-                     <img src="images/b-logo2.png" alt="Brand">
+                     <img src="{{ asset('assets/frontend/images/b-logo2.png') }}" alt="Brand">
                 </div>
             </div>
 
             <div class="col-6 col-md-3 col-lg-2">
                 <div class="brand-card">
-                     <img src="images/b-logo.png" alt="Brand">
+                     <img src="{{ asset('assets/frontend/images/b-logo.png') }}" alt="Brand">
                 </div>
             </div>
 
             <div class="col-6 col-md-3 col-lg-2">
                 <div class="brand-card">
-                     <img src="images/b-logo2.png" alt="Brand">
+                     <img src="{{ asset('assets/frontend/images/b-logo2.png') }}" alt="Brand">
                 </div>
             </div>
 
             <div class="col-6 col-md-3 col-lg-2">
                 <div class="brand-card">
-                     <img src="images/b-logo.png" alt="Brand">
+                     <img src="{{ asset('assets/frontend/images/b-logo.png') }}" alt="Brand">
                 </div>
             </div>
 
